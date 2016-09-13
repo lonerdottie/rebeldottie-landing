@@ -1,9 +1,93 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <title> </title>
-    </head>
-    <body>
+<html lang="en">
 
-    </body>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>rebeldottie.com</title>
+
+    <!-- Google Tag Manager -->
+    <noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-5SZ362" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <script>
+        (function(w, d, s, l, i) {
+            w[l] = w[l] || [];
+            w[l].push({
+                'gtm.start': new Date().getTime(),
+                event: 'gtm.js'
+            });
+            var f = d.getElementsByTagName(s)[0],
+                j = d.createElement(s),
+                dl = l != 'dataLayer' ? '&l=' + l : '';
+            j.async = true;
+            j.src =
+                '//www.googletagmanager.com/gtm.js?id=' + i + dl;
+            f.parentNode.insertBefore(j, f);
+        })(window, document, 'script', 'dataLayer', 'GTM-5SZ362');
+    </script>
+    <!-- End Google Tag Manager -->
+
+    <!-- Google APIs -->
+    <script src="https://apis.google.com/js/api.js?onload=handleClientLoad"></script>
+
+
+    <!-- Angular Material stylesheet -->
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.css">
+
+    <!-- Main stylesheet -->
+    <link rel="stylesheet" href="styles/main.css">
+
+</head>
+
+<body>
+
+    <!-- main block of HTML code for the view -->
+    <div id="main" ng-app="rebeldottie" ng-cloak>
+
+        <md-toolbar md-scroll-shrink ng-if="true" ng-controller="toolbar">
+            <div class="md-toolbar-tools">
+                <h3>
+                    <span>{{title}}</span>
+                </h3>
+            </div>
+        </md-toolbar>
+        
+        <!-- old junk from the gapiHelper construction process
+        
+            <button id="authorize-button">Authorize</button>
+            <button id="reqmore-button">Request More</button>
+            <button id="signout-button">Sign Out</button>
+        
+        -->
+    </div>
+
+    <!-- includes for scripts -->
+    <div id="scripts-includes">
+        <!-- gapiHelper library -->
+        <script src="scripts/gapiHelper.js"></script>
+
+        <!-- Angular Material required Angular.js Libraries -->
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-animate.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-aria.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-messages.min.js"></script>
+
+        <!-- Angular Material Library -->
+        <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.1/angular-material.min.js"></script>
+
+        <!-- the main JS file where core code is stored -->
+        <script src="scripts/main.js"></script>
+
+    </div>
+
+    <!-- Your application bootstrap  -->
+    <script type="text/javascript">
+        angular.module('rebeldottie', ['ngMaterial'])
+
+        .controller('toolbar', function($scope) {
+            $scope.title = 'Rebel Dottie';
+        });
+    </script>
+
+</body>
+
 </html>

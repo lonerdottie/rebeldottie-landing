@@ -1,5 +1,5 @@
-application: rebeldottie-landing
-runtime: php
+#application: rebeldottie-landing
+runtime: php55
 api_version: 1
 threadsafe: yes
 
@@ -44,3 +44,4 @@ skip_files:
   - ^testrunner\.py
   - ^grunt\.js
   - ^node_modules/(.*/)?
+  - app.js
