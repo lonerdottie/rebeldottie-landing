@@ -1,0 +1,9 @@
+<!-- Body tag augmented with ngController directive  -->
+<div ngController="mainController as main">
+    <script>
+        main.title = "Temp";
+        //console.log('test');
+    </script>
+    <title>{{overlord.title || 'Undef'}}</title>
+    Title: {{overlord.title || 'Undef'}}
+</div>

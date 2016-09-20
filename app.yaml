@@ -7,25 +7,46 @@ handlers:
 
 # Handle the main page by serving the index page.
 # Note the $ to specify the end of the path, since app.yaml does prefix matching.
-- url: /$
+
+- url: /images/(.+)$
+  static_files: public/images/\1
+  upload: public/images/(.+)
+
+- url: /scripts/(.+)$
+  static_files: public/scripts/\1
+  upload: public/scripts/(.+)
+  
+- url: /styles/(.+)$
+  static_files: public/styles/\1
+  upload: public/styles/(.+)
+  
+- url: /views/(.+)$
+  static_files: public/views/\1
+  upload: public/views/(.+)
+  
+- url: /(.+)
   static_files: public/index.html
   upload: public/index.html
-
-
+  
+- url: /
+  static_files: public/index.html
+  upload: public/index.html
+  
 # Handle folder urls by serving the index.html page inside.
-- url: /(.*)/$
-  static_files: public/\1/index.html
-  upload: public/.*/index.html
+#- url: /(.*)/$
+#  static_files: public/\1/index.html
+#  upload: public/.*/index.html
 
 # Handle nearly every other file by just serving it.
-- url: /(.+)
-  static_files: public/\1
-  upload: public/(.*)
+#- url: /(.+)
+#  static_files: public/\1
+#  upload: public/(.*)
 
 
 # Recommended file skipping declaration from the GAE tutorials
 skip_files:
   - ^(.*/)?app\.yaml
+  - ^(.*/)?app\.js
   - ^(.*/)?app\.yml
   - ^(.*/)?#.*#
   - ^(.*/)?.*~
@@ -44,4 +65,3 @@ skip_files:
   - ^testrunner\.py
   - ^grunt\.js
   - ^node_modules/(.*/)?
-  - app.js

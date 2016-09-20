@@ -91,22 +91,15 @@ gapiHelper.signIn = function(authScope) {
       });
 }
 
+/** 
 function handleReqMoreClick(event) {
   gapiHelper.addScope('https://www.googleapis.com/auth/analytics');
-  /*
-  gapi.auth2.getAuthInstance().signIn({ 'scope': 'https://www.googleapis.com/auth/analytics' })
-  .then(
-    function(value){
-      
-    },
-    function(error){
-      
-    }); */
 }
 
 function handleSignoutClick(event) {
   gapiHelper.currentAuth.signOut();
 }
+**/
 
 gapi.load('client:auth2', initAuth);
 

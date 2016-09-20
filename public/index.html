@@ -26,31 +26,75 @@
     </script>
     <!-- End Google Tag Manager -->
 
-    <!-- Google APIs -->
+    <!-- Google APIs
     <script src="https://apis.google.com/js/api.js?onload=handleClientLoad"></script>
-
+     -->
 
     <!-- Angular Material stylesheet -->
-    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.css">
+    <link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.css">
+    <link href="//fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
 
     <!-- Main stylesheet -->
     <link rel="stylesheet" href="styles/main.css">
 
+    <base href="/">
 </head>
 
 <body>
 
     <!-- main block of HTML code for the view -->
-    <div id="main" ng-app="rebeldottie" ng-cloak>
+    <div id="main" ng-app="rebeldottie" ng-controller="coreControls as core" ng-cloak>
+        <div ng-controller="toolbar">
+            <md-toolbar md-scroll-shrink ng-if="true">
+                <div class="md-toolbar-tools">
+                    <md-button class="md-icon-button" aria-label="Menu" ng-click="toggleLeft()">
+                        <md-icon>menu</md-icon>
+                    </md-button>
+                    <h3>
+                        <span>{{title}}</span>
+                    </h3>
+                </div>
+                <md-content>
+                    <md-nav-bar md-selected-nav-item="currentNavItem" nav-bar-aria-label="navigation links">
+                        <md-nav-item md-nav-href="/" name="page1">Home</md-nav-item>
+                        <md-nav-item md-nav-href="about" name="page2">About</md-nav-item>
+                        <md-nav-item md-nav-href="contact" name="page3">Contact</md-nav-item>
+                        <!-- these require actual routing with ui-router or ng-route, so they won't work in the demo
+      <md-nav-item md-nav-sref="app.page4" name="page4">Page Four</md-nav-item>
+      <md-nav-item md-nav-href="#page5" name="page5">Page Five</md-nav-item>
+      -->
+                    </md-nav-bar>
+                </md-content>
+            </md-toolbar>
+            <section>
 
-        <md-toolbar md-scroll-shrink ng-if="true" ng-controller="toolbar">
-            <div class="md-toolbar-tools">
-                <h3>
-                    <span>{{title}}</span>
-                </h3>
-            </div>
-        </md-toolbar>
-        
+                <md-sidenav class="md-sidenav-left" md-component-id="left" md-whiteframe="4">
+
+                    <md-toolbar class="md-theme-indigo">
+                        <div class="md-toolbar-tools">
+                            <md-button class="md-icon-button" aria-label="Menu" ng-click="toggleLeft()">
+                                <md-icon>menu</md-icon>
+                            </md-button>
+                            <h1 class="md-toolbar-tools">Menu</h1>
+                        </div>
+                    </md-toolbar>
+
+                    <md-content layout-margin>
+                        <p>
+                            This sidenav is not showing any backdrop, where users can click on it, to close the sidenav.
+                        </p>
+                    </md-content>
+                    <md-button ng-click="toggleLeft()" hide-gt-xs class="md-fab md-accent md-fab-bottom-right">
+                        <md-icon>arrow_back</md-icon>
+                    </md-button>
+                </md-sidenav>
+
+            </section>
+        </div>
+        <div ng-view>
+        </div>
+
         <!-- old junk from the gapiHelper construction process
         
             <button id="authorize-button">Authorize</button>
@@ -62,17 +106,20 @@
 
     <!-- includes for scripts -->
     <div id="scripts-includes">
-        <!-- gapiHelper library -->
+        <!-- gapiHelper library
         <script src="scripts/gapiHelper.js"></script>
+         -->
 
         <!-- Angular Material required Angular.js Libraries -->
-        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-animate.min.js"></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-aria.min.js"></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-messages.min.js"></script>
+        <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
+        <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-animate.min.js"></script>
+        <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-aria.min.js"></script>
+        <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-messages.min.js"></script>
+        <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-route.js"></script>
+
 
         <!-- Angular Material Library -->
-        <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.1/angular-material.min.js"></script>
+        <script src="//ajax.googleapis.com/ajax/libs/angular_material/1.1.1/angular-material.min.js"></script>
 
         <!-- the main JS file where core code is stored -->
         <script src="scripts/main.js"></script>
@@ -81,11 +128,101 @@
 
     <!-- Your application bootstrap  -->
     <script type="text/javascript">
-        angular.module('rebeldottie', ['ngMaterial'])
+        //var shareService = {};
+        //var data = {};
+        //var gapiShared = { 'data':'test123', 'title':'Rebel Dottie - Empty'};
 
-        .controller('toolbar', function($scope) {
-            $scope.title = 'Rebel Dottie';
+        var app = angular.module('rebeldottie', ['ngMaterial', 'ngRoute']);
+
+        app.config(function($routeProvider, $locationProvider) {
+            $routeProvider
+                .when('/about', {
+                    templateUrl: 'views/about.html',
+                    controller: 'mainController',
+                })
+                .when('/contact', {
+                    templateUrl: 'views/contact.html',
+                    controller: 'mainController',
+                })
+                .otherwise({
+                    templateUrl: 'views/home.html',
+                    controller: 'mainController',
+                    controllerAs: 'overlord'
+                });
+            //console.log(sharedServices);
+
+            // use the HTML5 History API
+            $locationProvider.html5Mode(true);
         });
+
+        var dataLayer = window.dataLayer = window.dataLayer || [];
+
+        app.service('sharedServices', ['$rootScope', '$location', function($rootScope, $location) {
+            this.updateTitle = function(data) {
+                //console.log('sharedServices: updateTitle request.');
+                $rootScope.$broadcast('updateTitle', data);
+            }
+            $rootScope.$on('$routeChangeSuccess', function() {
+                dataLayer.push({
+                    event: 'ngRouteChange',
+                    attributes: {
+                        route: $location.path()
+                    }
+                });
+            });
+        }]);
+
+        app.controller('coreControls', function() {});
+
+        app.controller('toolbar', ['$scope', '$rootScope', '$mdSidenav', 'sharedServices', function($scope, $rootScope, $mdSidenav, sharedServices) {
+            $scope.$on('updateTitle', function(event, data) {
+                    //console.log('got updateTitle request');
+                    //console.log(data);
+                    $scope.title = data;
+                    sharedServices.title = data;
+                    //console.log(gapiShared.title);
+                })
+                //console.log(gapiShared);
+            $scope.toggleLeft = buildToggler('left');
+
+            function buildToggler(componentId) {
+                return function() {
+                    $mdSidenav(componentId).toggle();
+                    //console.log($mdSidenav(componentId));
+                    dataLayer.push({
+                        event: 'sideNavToggled',
+                        attributes: {
+                            open: $mdSidenav(componentId).isOpen()
+                        }
+                    });
+                }
+            }
+            $scope.title = 'Rebel Dottie - Undefined';
+        }]);
+
+        app.controller('mainController', ['$scope', '$rootScope', 'sharedServices', '$route', function($scope, $rootScope, sharedServices, $route) {
+            //gapiShared.title = 'Rebel Dottie - Page';
+            //sharedServices.updateTitle('Rebel Dottie - Page');
+            console.log('first init');
+            //$scope.overlord.title = 'test123';
+            console.log($scope.overlord)
+            $scope.$on('$viewContentLoaded', function(event) {
+                console.log('view content loaded');
+                //$scope.overlord.title = 'test123';
+                console.log($scope)
+                    //console.log(event);
+                sharedServices.updateTitle('Rebel Dottie - ' + $scope.title);
+            });
+
+            //if ($scope.currentNavItem==undefined) $scope.currentNavItem = 'page1';
+            //$rootScope.$broadcast('updateTitle', 'Rebel Dottie - Page');
+            //shareService.setTitle('Rebel Dottie - Page');
+            //console.log(shareService.title)
+        }]);
+
+        /**
+            Routing and Analytics
+        **/
     </script>
 
 </body>
