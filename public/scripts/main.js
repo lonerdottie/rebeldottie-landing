@@ -18,7 +18,8 @@
                     causes a critical stop
                 */
                 $rootScope.$on('$routeChangeSuccess', function(event, current, previous) {
-                    $scope.title = $route.current.$$route.viewTitle;
+                    $scope.currentNavItem = $('.md-nav-item[md-nav-href|="' + window.location.pathname + '"]').attr('name');
+                    $scope.title = $scope.currentNavItem;
                     dataLayer.push({
                         event: 'ngRouteChange',
                         attributes: {
