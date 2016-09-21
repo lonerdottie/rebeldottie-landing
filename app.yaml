@@ -2,6 +2,7 @@
 runtime: php55
 api_version: 1
 threadsafe: yes
+default_expiration: "30m"
 
 handlers:
 
@@ -27,6 +28,12 @@ handlers:
   static_files: public/views/\1
   upload: public/views/(.+)
   secure: always
+  
+- url: /nm/(.+)$
+  static_files: public/nm/\1
+  upload: public/nm/(.+)
+  secure: always
+  expiration: "4d"
 
   
 - url: /(.+)
