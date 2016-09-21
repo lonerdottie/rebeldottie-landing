@@ -11,26 +11,33 @@ handlers:
 - url: /images/(.+)$
   static_files: public/images/\1
   upload: public/images/(.+)
+  secure: always
 
 - url: /scripts/(.+)$
   static_files: public/scripts/\1
   upload: public/scripts/(.+)
+  secure: always
   
 - url: /styles/(.+)$
   static_files: public/styles/\1
   upload: public/styles/(.+)
+  secure: always
   
 - url: /views/(.+)$
   static_files: public/views/\1
   upload: public/views/(.+)
+  secure: always
+
   
 - url: /(.+)
   static_files: public/index.html
   upload: public/index.html
+  secure: always
   
 - url: /
   static_files: public/index.html
   upload: public/index.html
+  secure: always
   
 # Handle folder urls by serving the index.html page inside.
 #- url: /(.*)/$
