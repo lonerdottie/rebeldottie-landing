@@ -136,21 +136,6 @@
         console.log('initializing angular app..');
         var app = angular.module('rebeldottie', ['ngMaterial', 'ngRoute']);
 
-        /** so far no need for a shared service
-        app.service('sharedServices', ['$rootScope', '$location', function($rootScope, $location) {
-            this.updateTitle = function(data) {
-                console.log('sharedServices: updateTitle request.');
-                $rootScope.$broadcast('updateTitle', data);
-            };
-            $rootScope.$on('$routeChangeSuccess', function() {
-                dataLayer.push({
-                    event: 'ngRouteChange',
-                    attributes: {
-                        route: $location.path()
-                    }
-                });
-            });
-        }]); **/
         console.log('initializing coreControls..');
         app.controller('coreControls', ['$scope', '$rootScope', '$location', '$route', '$mdSidenav',
             function($scope, $rootScope, $location, $route, $mdSidenav) {
@@ -158,6 +143,11 @@
 
                 /*
                     Routing and view stuff
+                    viewTitle must be set in the view
+                    otherwise it seems to kick back an error
+                    not sure how to setup a test because
+                    even checking the undefined viewTitle
+                    causes a critical stop
                 */
                 $rootScope.$on('$routeChangeSuccess', function(event, current, previous) {
                     $scope.title = $route.current.$$route.viewTitle;
@@ -168,16 +158,10 @@
                         }
                     });
                 });
-                
-                /** possibly unneeded view load
-                $scope.$on('$viewContentLoaded', function(event, current, previous) {
-                    //console.log('view content loaded');
-                    //console.log(event);
-                });
-                    **/
                     
                 /*
                     Code to toggle sideNav
+                    Also triggers a GTM dataLayer event to track views
                 */
                 $scope.toggleSideNav = function() {
                     $mdSidenav('sideNav').toggle();
@@ -188,26 +172,17 @@
                         }
                     });
                 };
-                /** no longer needed code
-                $scope.$on('updateTitle', function(event, data) {
-                    console.log('got updateTitle request: ' + data);
-                    //console.log(data);
-                    $scope.title = 'title ' + data;
-                    //sharedServices.title = data;
-                    //console.log(gapiShared.title);
-                }); **/
             }
         ]);
 
-        /** 
-          possibly unneeded viewControls controller since each view would likely have its own view
-        
-        app.controller('viewControls', ['$scope', 'sharedServices',
-            function($scope, sharedServices) {
-
-            }
-        ]);
-            **/
+        /**
+         * 
+         * Here you should be able to define any view template
+         * Note: it must contain a viewTitle
+         *       no idea yet how to make it stop kicking errors
+         *       whenever I test if viewTitle is set already
+         * 
+         **/
         app.config(function($routeProvider, $locationProvider) {
             $routeProvider
                 .when('/about', {
