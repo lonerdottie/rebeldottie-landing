@@ -1,9 +1,8 @@
-<!-- Body tag augmented with ngController directive  -->
-<div ngController="mainController as main">
+<body name="Home">
+    Here is the home!
     <script>
-        main.title = "Temp";
-        //console.log('test');
+        //sharedServices.updateTitle('test');
+        console.log('view good from inside');
+        
     </script>
-    <title>{{overlord.title || 'Undef'}}</title>
-    Title: {{overlord.title || 'Undef'}}
-</div>
+</body>
