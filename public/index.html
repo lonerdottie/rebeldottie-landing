@@ -30,8 +30,20 @@
     <link rel="stylesheet" href="/nm/angular-material/angular-material.min.css" type="text/css" />
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
-
     <style>
+        .splash {
+            display: block !important;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            max-width: 5%;
+        }
+        
+        .splash.fadeOut {
+            display: none !important;
+        }
+        
         #main {
             opacity: 0;
         }
@@ -79,12 +91,53 @@
                 opacity: 1;
             }
         }
+        
+        @-webkit-keyframes fadeout {
+            0% {
+                opacity: 1;
+            }
+            100% {
+                opacity: 0;
+                visibility: hidden;
+            }
+        }
+        
+        @-moz-keyframes fadeout {
+            0% {
+                opacity: 1;
+            }
+            100% {
+                opacity: 0;
+                visibility: hidden;
+            }
+        }
+        
+        @-o-keyframes fadeout {
+            0% {
+                opacity: 1;
+            }
+            100% {
+                opacity: 0;
+                visibility: hidden;
+            }
+        }
+        
+        @keyframes fadeout {
+            0% {
+                opacity: 1;
+            }
+            100% {
+                opacity: 0;
+            }
+        }
     </style>
 
     <base href="/">
 </head>
 
 <body ng-app="rebeldottie" ng-controller="coreControls">
+
+    <img src="/images/loading_spinner.gif" ng-class="{fadeOut:title}" ng-cloak class="splash">
 
     <!-- main block of HTML code for the view -->
     <div id="main" ng-cloak ng-class="{fadeIn:title}">
@@ -156,7 +209,6 @@
 
         <!-- Angular.js Core Library -->
         <script src="nm/angular/angular.min.js"></script>
-
 
         <!-- Defered Angular Material dependencies -->
         <script src="nm/angular-animate/angular-animate.min.js" defer></script>

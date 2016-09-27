@@ -17,6 +17,7 @@ app.use('/nm/angular-material', express.static(__dirname + '/public/nm/angular-m
 app.use('/nm/angular-messages', express.static(__dirname + '/public/nm/angular-messages'));
 app.use('/nm/angular-route', express.static(__dirname + '/public/nm/angular-route'));
 app.use('/nm/jquery/dist', express.static(__dirname + '/public/nm/jquery/dist'));
+//app.use('/nm/angular-loading-bar', express.static(__dirname + '/public/nm/angular-loading-bar/build'));
 
 
 
