@@ -64,7 +64,8 @@ app.controller('coreControls', ['$scope', '$rootScope', '$location', '$route', '
  *       whenever I test if viewTitle is set already
  * 
  **/
-app.config(function($routeProvider, $locationProvider) {
+app.config(function($routeProvider, $locationProvider, $mdThemingProvider) {
+    $mdThemingProvider.enableBrowserColor();
     $routeProvider
         .when('/about', {
             templateUrl: 'views/about.html',
